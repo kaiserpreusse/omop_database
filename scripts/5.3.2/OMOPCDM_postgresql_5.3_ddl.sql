@@ -1,8 +1,7 @@
---postgresql CDM DDL Specification for OMOP Common Data Model v5_3_1
+--postgresql CDM DDL Specification for OMOP Common Data Model 5.3
 
 --HINT DISTRIBUTE ON KEY (person_id)
- CREATE TABLE PERSON (
-
+CREATE TABLE PERSON (
 			person_id integer NOT NULL,
 			gender_concept_id integer NOT NULL,
 			year_of_birth integer NOT NULL,
@@ -23,8 +22,7 @@
 			ethnicity_source_concept_id integer NULL );
 
 --HINT DISTRIBUTE ON KEY (person_id)
- CREATE TABLE OBSERVATION_PERIOD (
-
+CREATE TABLE OBSERVATION_PERIOD (
 			observation_period_id integer NOT NULL,
 			person_id integer NOT NULL,
 			observation_period_start_date date NOT NULL,
@@ -32,8 +30,7 @@
 			period_type_concept_id integer NOT NULL );
 
 --HINT DISTRIBUTE ON KEY (person_id)
- CREATE TABLE VISIT_OCCURRENCE (
-
+CREATE TABLE VISIT_OCCURRENCE (
 			visit_occurrence_id integer NOT NULL,
 			person_id integer NOT NULL,
 			visit_concept_id integer NOT NULL,
@@ -53,8 +50,7 @@
 			preceding_visit_occurrence_id integer NULL );
 
 --HINT DISTRIBUTE ON KEY (person_id)
- CREATE TABLE VISIT_DETAIL (
-
+CREATE TABLE VISIT_DETAIL (
 			visit_detail_id integer NOT NULL,
 			person_id integer NOT NULL,
 			visit_detail_concept_id integer NOT NULL,
@@ -76,8 +72,7 @@
 			visit_occurrence_id integer NOT NULL );
 
 --HINT DISTRIBUTE ON KEY (person_id)
- CREATE TABLE CONDITION_OCCURRENCE (
-
+CREATE TABLE CONDITION_OCCURRENCE (
 			condition_occurrence_id integer NOT NULL,
 			person_id integer NOT NULL,
 			condition_concept_id integer NOT NULL,
@@ -96,8 +91,7 @@
 			condition_status_source_value varchar(50) NULL );
 
 --HINT DISTRIBUTE ON KEY (person_id)
- CREATE TABLE DRUG_EXPOSURE (
-
+CREATE TABLE DRUG_EXPOSURE (
 			drug_exposure_id integer NOT NULL,
 			person_id integer NOT NULL,
 			drug_concept_id integer NOT NULL,
@@ -123,8 +117,7 @@
 			dose_unit_source_value varchar(50) NULL );
 
 --HINT DISTRIBUTE ON KEY (person_id)
- CREATE TABLE PROCEDURE_OCCURRENCE (
-
+CREATE TABLE PROCEDURE_OCCURRENCE (
 			procedure_occurrence_id integer NOT NULL,
 			person_id integer NOT NULL,
 			procedure_concept_id integer NOT NULL,
@@ -141,8 +134,7 @@
 			modifier_source_value varchar(50) NULL );
 
 --HINT DISTRIBUTE ON KEY (person_id)
- CREATE TABLE DEVICE_EXPOSURE (
-
+CREATE TABLE DEVICE_EXPOSURE (
 			device_exposure_id integer NOT NULL,
 			person_id integer NOT NULL,
 			device_concept_id integer NOT NULL,
@@ -151,17 +143,16 @@
 			device_exposure_end_date date NULL,
 			device_exposure_end_datetime TIMESTAMP NULL,
 			device_type_concept_id integer NOT NULL,
-			unique_device_id varchar(100) NULL,
+			unique_device_id varchar(50) NULL,
 			quantity integer NULL,
 			provider_id integer NULL,
 			visit_occurrence_id integer NULL,
 			visit_detail_id integer NULL,
-			device_source_value varchar(100) NULL,
+			device_source_value varchar(50) NULL,
 			device_source_concept_id integer NULL );
 
 --HINT DISTRIBUTE ON KEY (person_id)
- CREATE TABLE MEASUREMENT (
-
+CREATE TABLE MEASUREMENT (
 			measurement_id integer NOT NULL,
 			person_id integer NOT NULL,
 			measurement_concept_id integer NOT NULL,
@@ -184,8 +175,7 @@
 			value_source_value varchar(50) NULL );
 
 --HINT DISTRIBUTE ON KEY (person_id)
- CREATE TABLE OBSERVATION (
-
+CREATE TABLE OBSERVATION (
 			observation_id integer NOT NULL,
 			person_id integer NOT NULL,
 			observation_concept_id integer NOT NULL,
@@ -206,10 +196,9 @@
 			qualifier_source_value varchar(50) NULL );
 
 --HINT DISTRIBUTE ON KEY (person_id)
- CREATE TABLE DEATH (
-
-			person_id integer NULL,
-			death_date date NULL,
+CREATE TABLE DEATH (
+			person_id integer NOT NULL,
+			death_date date NOT NULL,
 			death_datetime TIMESTAMP NULL,
 			death_type_concept_id integer NULL,
 			cause_concept_id integer NULL,
@@ -217,8 +206,7 @@
 			cause_source_concept_id integer NULL );
 
 --HINT DISTRIBUTE ON KEY (person_id)
- CREATE TABLE NOTE (
-
+CREATE TABLE NOTE (
 			note_id integer NOT NULL,
 			person_id integer NOT NULL,
 			note_date date NOT NULL,
@@ -235,8 +223,7 @@
 			note_source_value varchar(50) NULL );
 
 --HINT DISTRIBUTE ON RANDOM
- CREATE TABLE NOTE_NLP (
-
+CREATE TABLE NOTE_NLP (
 			note_nlp_id integer NOT NULL,
 			note_id integer NOT NULL,
 			section_concept_id integer NULL,
@@ -253,8 +240,7 @@
 			term_modifiers varchar(2000) NULL );
 
 --HINT DISTRIBUTE ON KEY (person_id)
- CREATE TABLE SPECIMEN (
-
+CREATE TABLE SPECIMEN (
 			specimen_id integer NOT NULL,
 			person_id integer NOT NULL,
 			specimen_concept_id integer NOT NULL,
@@ -272,8 +258,7 @@
 			disease_status_source_value varchar(50) NULL );
 
 --HINT DISTRIBUTE ON RANDOM
- CREATE TABLE FACT_RELATIONSHIP (
-
+CREATE TABLE FACT_RELATIONSHIP (
 			domain_concept_id_1 integer NOT NULL,
 			fact_id_1 integer NOT NULL,
 			domain_concept_id_2 integer NOT NULL,
@@ -281,8 +266,7 @@
 			relationship_concept_id integer NOT NULL );
 
 --HINT DISTRIBUTE ON RANDOM
- CREATE TABLE LOCATION (
-
+CREATE TABLE LOCATION (
 			location_id integer NOT NULL,
 			address_1 varchar(50) NULL,
 			address_2 varchar(50) NULL,
@@ -293,8 +277,7 @@
 			location_source_value varchar(50) NULL );
 
 --HINT DISTRIBUTE ON RANDOM
- CREATE TABLE CARE_SITE (
-
+CREATE TABLE CARE_SITE (
 			care_site_id integer NOT NULL,
 			care_site_name varchar(255) NULL,
 			place_of_service_concept_id integer NULL,
@@ -303,8 +286,7 @@
 			place_of_service_source_value varchar(50) NULL );
 
 --HINT DISTRIBUTE ON RANDOM
- CREATE TABLE PROVIDER (
-
+CREATE TABLE PROVIDER (
 			provider_id integer NOT NULL,
 			provider_name varchar(255) NULL,
 			npi varchar(20) NULL,
@@ -320,8 +302,7 @@
 			gender_source_concept_id integer NULL );
 
 --HINT DISTRIBUTE ON KEY (person_id)
- CREATE TABLE PAYER_PLAN_PERIOD (
-
+CREATE TABLE PAYER_PLAN_PERIOD (
 			payer_plan_period_id integer NOT NULL,
 			person_id integer NOT NULL,
 			payer_plan_period_start_date date NOT NULL,
@@ -341,8 +322,7 @@
 			stop_reason_source_concept_id integer NULL );
 
 --HINT DISTRIBUTE ON RANDOM
- CREATE TABLE COST (
-
+CREATE TABLE COST (
 			cost_id integer NOT NULL,
 			cost_event_id integer NOT NULL,
 			cost_domain_id varchar(20) NOT NULL,
@@ -367,40 +347,36 @@
 			drg_source_value varchar(3) NULL );
 
 --HINT DISTRIBUTE ON KEY (person_id)
- CREATE TABLE DRUG_ERA (
-
+CREATE TABLE DRUG_ERA (
 			drug_era_id integer NOT NULL,
 			person_id integer NOT NULL,
 			drug_concept_id integer NOT NULL,
-			drug_era_start_date TIMESTAMP NOT NULL,
-			drug_era_end_date TIMESTAMP NOT NULL,
+			drug_era_start_date date NOT NULL,
+			drug_era_end_date date NOT NULL,
 			drug_exposure_count integer NULL,
 			gap_days integer NULL );
 
 --HINT DISTRIBUTE ON KEY (person_id)
- CREATE TABLE DOSE_ERA (
-
+CREATE TABLE DOSE_ERA (
 			dose_era_id integer NOT NULL,
 			person_id integer NOT NULL,
 			drug_concept_id integer NOT NULL,
 			unit_concept_id integer NOT NULL,
 			dose_value NUMERIC NOT NULL,
-			dose_era_start_date TIMESTAMP NOT NULL,
-			dose_era_end_date TIMESTAMP NOT NULL );
+			dose_era_start_date date NOT NULL,
+			dose_era_end_date date NOT NULL );
 
 --HINT DISTRIBUTE ON KEY (person_id)
- CREATE TABLE CONDITION_ERA (
-
+CREATE TABLE CONDITION_ERA (
 			condition_era_id integer NOT NULL,
 			person_id integer NOT NULL,
 			condition_concept_id integer NOT NULL,
-			condition_era_start_date TIMESTAMP NOT NULL,
-			condition_era_end_date TIMESTAMP NOT NULL,
+			condition_era_start_date date NOT NULL,
+			condition_era_end_date date NOT NULL,
 			condition_occurrence_count integer NULL );
 
 --HINT DISTRIBUTE ON RANDOM
- CREATE TABLE METADATA (
-
+CREATE TABLE METADATA (
 			metadata_concept_id integer NOT NULL,
 			metadata_type_concept_id integer NOT NULL,
 			name varchar(250) NOT NULL,
@@ -410,8 +386,7 @@
 			metadata_datetime TIMESTAMP NULL );
 
 --HINT DISTRIBUTE ON RANDOM
- CREATE TABLE CDM_SOURCE (
-
+CREATE TABLE CDM_SOURCE (
 			cdm_source_name varchar(255) NOT NULL,
 			cdm_source_abbreviation varchar(25) NULL,
 			cdm_holder varchar(255) NULL,
@@ -424,8 +399,7 @@
 			vocabulary_version varchar(20) NULL );
 
 --HINT DISTRIBUTE ON RANDOM
- CREATE TABLE CONCEPT (
-
+CREATE TABLE CONCEPT (
 			concept_id integer NOT NULL,
 			concept_name varchar(255) NOT NULL,
 			domain_id varchar(20) NOT NULL,
@@ -438,8 +412,7 @@
 			invalid_reason varchar(1) NULL );
 
 --HINT DISTRIBUTE ON RANDOM
- CREATE TABLE VOCABULARY (
-
+CREATE TABLE VOCABULARY (
 			vocabulary_id varchar(20) NOT NULL,
 			vocabulary_name varchar(255) NOT NULL,
 			vocabulary_reference varchar(255) NOT NULL,
@@ -447,22 +420,19 @@
 			vocabulary_concept_id integer NOT NULL );
 
 --HINT DISTRIBUTE ON RANDOM
- CREATE TABLE DOMAIN (
-
+CREATE TABLE DOMAIN (
 			domain_id varchar(20) NOT NULL,
 			domain_name varchar(255) NOT NULL,
 			domain_concept_id integer NOT NULL );
 
 --HINT DISTRIBUTE ON RANDOM
- CREATE TABLE CONCEPT_CLASS (
-
+CREATE TABLE CONCEPT_CLASS (
 			concept_class_id varchar(20) NOT NULL,
 			concept_class_name varchar(255) NOT NULL,
 			concept_class_concept_id integer NOT NULL );
 
 --HINT DISTRIBUTE ON RANDOM
- CREATE TABLE CONCEPT_RELATIONSHIP (
-
+CREATE TABLE CONCEPT_RELATIONSHIP (
 			concept_id_1 integer NOT NULL,
 			concept_id_2 integer NOT NULL,
 			relationship_id varchar(20) NOT NULL,
@@ -471,8 +441,7 @@
 			invalid_reason varchar(1) NULL );
 
 --HINT DISTRIBUTE ON RANDOM
- CREATE TABLE RELATIONSHIP (
-
+CREATE TABLE RELATIONSHIP (
 			relationship_id varchar(20) NOT NULL,
 			relationship_name varchar(255) NOT NULL,
 			is_hierarchical varchar(1) NOT NULL,
@@ -481,23 +450,20 @@
 			relationship_concept_id integer NOT NULL );
 
 --HINT DISTRIBUTE ON RANDOM
- CREATE TABLE CONCEPT_SYNONYM (
-
+CREATE TABLE CONCEPT_SYNONYM (
 			concept_id integer NOT NULL,
 			concept_synonym_name varchar(1000) NOT NULL,
 			language_concept_id integer NOT NULL );
 
 --HINT DISTRIBUTE ON RANDOM
- CREATE TABLE CONCEPT_ANCESTOR (
-
+CREATE TABLE CONCEPT_ANCESTOR (
 			ancestor_concept_id integer NOT NULL,
 			descendant_concept_id integer NOT NULL,
 			min_levels_of_separation integer NOT NULL,
 			max_levels_of_separation integer NOT NULL );
 
 --HINT DISTRIBUTE ON RANDOM
- CREATE TABLE SOURCE_TO_CONCEPT_MAP (
-
+CREATE TABLE SOURCE_TO_CONCEPT_MAP (
 			source_code varchar(50) NOT NULL,
 			source_concept_id integer NOT NULL,
 			source_vocabulary_id varchar(20) NOT NULL,
@@ -509,8 +475,7 @@
 			invalid_reason varchar(1) NULL );
 
 --HINT DISTRIBUTE ON RANDOM
- CREATE TABLE DRUG_STRENGTH (
-
+CREATE TABLE DRUG_STRENGTH (
 			drug_concept_id integer NOT NULL,
 			ingredient_concept_id integer NOT NULL,
 			amount_value NUMERIC NULL,
@@ -525,8 +490,7 @@
 			invalid_reason varchar(1) NULL );
 
 --HINT DISTRIBUTE ON RANDOM
- CREATE TABLE COHORT_DEFINITION (
-
+CREATE TABLE COHORT_DEFINITION (
 			cohort_definition_id integer NOT NULL,
 			cohort_definition_name varchar(255) NOT NULL,
 			cohort_definition_description TEXT NULL,
@@ -536,8 +500,7 @@
 			cohort_initiation_date date NULL );
 
 --HINT DISTRIBUTE ON RANDOM
- CREATE TABLE ATTRIBUTE_DEFINITION (
-
+CREATE TABLE ATTRIBUTE_DEFINITION (
 			attribute_definition_id integer NOT NULL,
 			attribute_name varchar(255) NOT NULL,
 			attribute_description TEXT NULL,
