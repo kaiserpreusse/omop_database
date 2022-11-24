@@ -4,7 +4,7 @@ with the OMOP Common Data Model for testing purposes.
 
 Database setup has to be done manually but this guide facilitates the process.
 
-> :point_right: Some settings are not parameterized yet. For now Postgres and OMOP CDM v5.3.1 are hard coded.See this project to load some synthetic health data to the OMOP CDM database: https://github.com/kaiserpreusse/synthea2omop
+> :point_right: See this project to load some synthetic health data to the OMOP CDM database: https://github.com/kaiserpreusse/synthea2omop
 
 ## Basic steps
 
