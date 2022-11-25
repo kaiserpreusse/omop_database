@@ -1,3 +1,5 @@
+# psql -h host -U user -p port -d dbname -f file.sql
+
 set schema 'synthea';
 \copy DRUG_STRENGTH FROM 'DRUG_STRENGTH.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b' ;
 \copy CONCEPT FROM 'CONCEPT.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b' ;
